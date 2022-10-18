@@ -6,6 +6,59 @@ var border_color = "";
 var pos_pointeur = false;
 var pos_click = false;
 
+/* Implémentation de la check Box */ 
+
+checkBox();
+
+function checkBox() {
+  $("fieldset").click( (data) => {
+    var name = data.target.name
+    var activer = data.target.checked;
+    
+  switch (name) {
+    case 'check_div':
+      if (activer) {
+        console.log('ici');
+        $('div').css('border', '2px solid red');
+      } else {
+        $('div').css('border', '');
+      }
+      break;
+    case 'check_p':
+      if (activer) {
+        $('p').css('border', '2px solid blue');
+      } else {
+        $('p').css('border', '');
+      }
+      break;
+    case 'check_image':
+      if (activer) {
+        $('img').css('border', '2px solid yellow');
+      } else {
+        $('img').css('border', '');
+      }
+      break;
+    case 'check_section':
+      if (activer) {
+        $('section').css('border', '2px solid green');
+      } else {
+        $('section').css('border', '');
+      }
+      break;
+      default:
+        break
+    } 
+  })
+}
+
+/*
+$('fieldset').click( 
+  (data) => {
+    let check_type = data.target.name;
+    checkBox(check_type);
+  }
+) */
+
 
 $('nav').hide();
 
@@ -65,7 +118,7 @@ $('#css_reset').click(function(e){
   /* FREDERIC GRUWE 2022 */
   $('#border-select').change((event) => {
     event.preventDefault();
-    $(`${cache}`).css('border', 'None');
+    $(`${cache}`).css('background-color', '');
     switch(event.target.value){
       case 'div':
         border_color = 'red';
@@ -76,9 +129,12 @@ $('#css_reset').click(function(e){
       case 'p':
         border_color = 'green';
         break;
+      case 'img':
+        border_color = 'yellow';
+        break;
       default:
         border_color = '';
     }
-    $(`${event.target.value}`).css('border', '0.2vw solid' + ' ' + border_color);
+    $(`${event.target.value}`).css('background-color', border_color);
     cache = event.target.value;
   })
